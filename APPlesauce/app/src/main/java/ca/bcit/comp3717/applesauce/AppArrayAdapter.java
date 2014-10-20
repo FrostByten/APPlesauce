@@ -1,6 +1,7 @@
 package ca.bcit.comp3717.applesauce;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,9 @@ public class AppArrayAdapter extends ArrayAdapter<String>
 {
     private final Context context;
     private final List<String> values;
-    private final List<Integer> images;
+    private final List<Drawable> images;
 
-    public AppArrayAdapter(Context context, List<String> values, List<Integer> images)
+    public AppArrayAdapter(Context context, List<String> values, List<Drawable> images)
     {
         super(context, R.layout.app_listing, values);
         this.context = context;
@@ -33,7 +34,7 @@ public class AppArrayAdapter extends ArrayAdapter<String>
         TextView textView = (TextView) rowView.findViewById(R.id.label);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.logo);
         textView.setText(values.get(position));
-        imageView.setImageResource(images.get(position));
+        imageView.setImageDrawable(images.get(position));
 
         return rowView;
     }

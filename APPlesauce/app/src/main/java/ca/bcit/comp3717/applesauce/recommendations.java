@@ -1,7 +1,9 @@
 package ca.bcit.comp3717.applesauce;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +16,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class recommendations extends Activity
 {
@@ -30,14 +31,14 @@ public class recommendations extends Activity
         lv.setTextFilterEnabled(true);
 
         final List<String> l = new ArrayList<String>();
-        final List<Integer> images = new ArrayList<Integer>();
+        final List<Drawable> images = new ArrayList<Drawable>();
         for(int i = 0; i < 56; i++)
         {
             l.add("Recommended App " + i);
             if(i%3==0)
-                images.add(R.drawable.ic_action_settings);
+                images.add(getApplicationContext().getResources().getDrawable(R.drawable.ic_action_settings));
             else
-                images.add(R.drawable.ic_launcher);
+                images.add(getApplicationContext().getResources().getDrawable(R.drawable.ic_launcher));
         }
 
         ArrayAdapter<String> ladapt = new AppArrayAdapter(this, l, images);
@@ -49,14 +50,9 @@ public class recommendations extends Activity
             {
                 String app=l.get(position);
                 Toast.makeText(getApplicationContext(), "Selected : " + app, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(Intent.CATEGORY_APP_MARKET);
-                intent.setData(Uri.parse("market://details?id=net.froemling.bombsquad"));
-                startActivity(intent);
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)

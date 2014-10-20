@@ -19,10 +19,14 @@
         <activity
             android:name=".recommendations"
             android:label="@string/title_activity_recommendations"
-            android:parentActivityName="ca.bcit.comp3717.applesauce.main">
+            android:parentActivityName=".main" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.bcit.comp3717.applesauce.main" />
+        </activity>
+        <activity
+            android:name=".applink"
+            android:label="@string/title_activity_applink" >
         </activity>
     </application>
 
