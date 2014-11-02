@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.bcit.comp3717.applesauce" >
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -8,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".main"
+            android:name=".Main"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,15 +18,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".recommendations"
+            android:name=".Recommendations"
             android:label="@string/title_activity_recommendations"
-            android:parentActivityName=".main" >
+            android:parentActivityName=".Main" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.bcit.comp3717.applesauce.main" />
         </activity>
         <activity
-            android:name=".applink"
+            android:name=".Applink"
             android:label="@string/title_activity_applink" >
         </activity>
     </application>
