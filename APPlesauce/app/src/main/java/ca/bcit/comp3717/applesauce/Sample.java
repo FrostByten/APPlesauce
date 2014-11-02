@@ -61,7 +61,78 @@ public class Sample {
         }
         catch(JSONException e)
         {
-            Log.d("readJSONFeed", e.getLocalizedMessage());
+            Log.d("getSample", e.getLocalizedMessage());
+        }
+
+        return result;
+    }
+
+    public static ArrayList<JSONObject> getSampleRecApps()
+    {
+
+        ArrayList<JSONObject> result = new ArrayList<JSONObject>();
+
+        try
+        {
+            JSONObject app = new JSONObject();
+            app.put("packageID","com.hotheadgames.google.free.rawsniper");
+            app.put("appName", "Kill Shot");
+            app.put("logo", "https://lh4.ggpht.com/glwlcnYFPE0fuS58CrAZQjj7TPYOP2vqu9faGZBYmYzThARe_ztXqvDqzplUh2KsvEo=w300");
+            app.put("playStoreUrl", "https://play.google.com/store/apps/details?id=com.hotheadgames.google.free.rawsniper");
+
+            result.add(app);
+
+            app = new JSONObject();
+            app.put("packageID","com.kixeye.vegaconflict");
+            app.put("appName", "VEGA Conflict");
+            app.put("logo", "https://lh3.ggpht.com/jg3rQDHtVrHmY2lh7Qd9s-TGQydBrUAAvcA_Dw4LyhTQOdBFSaxhjWKvxunACPBnYvk=w300");
+            app.put("playStoreUrl", "https://play.google.com/store/apps/details?id=com.kixeye.vegaconflict");
+
+            result.add(app);
+
+            app = new JSONObject();
+            app.put("packageID","com.mobage.ww.a1903.SWTD_Android");
+            app.put("appName", "Star Wars ™: Galactic Defense");
+            app.put("logo", "https://lh5.ggpht.com/mEsUA2RHhZvA6UE7YcBmsYyOlRX4pzgIDMxtDbMbHXPhtY-E3XomURaalcqCSxNog5X4=w300");
+            app.put("playStoreUrl", "https://play.google.com/store/apps/details?id=com.mobage.ww.a1903.SWTD_Android");
+
+            result.add(app);
+
+            app = new JSONObject();
+            app.put("packageID","com.kabam.metalskies.android");
+            app.put("appName", "Metal Skies");
+            app.put("logo", "https://lh3.ggpht.com/kebXmCS-LkyTH2yuKdthseNr0Q6dmycWGzR9zCRHYLRm5PayBbxwgOM9CYYnpeaz2b-H=w300");
+            app.put("playStoreUrl", "https://play.google.com/store/apps/details?id=com.kabam.metalskies.android");
+
+            result.add(app);
+
+            app = new JSONObject();
+            app.put("packageID","jp.co.ponos.battlecatsen");
+            app.put("appName", "The Battle Cats");
+            app.put("logo", "https://lh3.ggpht.com/P4otz7aGNuiiR4DlYgM7Mk0Se2VjrhAoIRwOG2c6nj_gP_fVHxaj1wVNPr6nPgWmkg=w300");
+            app.put("playStoreUrl", "https://play.google.com/store/apps/details?id=jp.co.ponos.battlecatsen");
+
+            result.add(app);
+
+            app = new JSONObject();
+            app.put("packageID","com.supercell.clashofclans");
+            app.put("appName", "Clash of Clans");
+            app.put("logo", "https://lh6.ggpht.com/1eVPA6Iukw-F4i5xq1ZWicaKBzmprLGw98YhdG20E-wlsHHg3PcKJqbY_fWLdJeGRw=w300");
+            app.put("playStoreUrl", "https://play.google.com/store/apps/details?id=com.supercell.clashofclans");
+
+            result.add(app);
+
+            app = new JSONObject();
+            app.put("packageID","com.ea.game.simpsons4_na");
+            app.put("appName", "The Simpsons™: Tapped Out");
+            app.put("logo", "https://lh3.ggpht.com/nEpv1ZTbzVeQIlHJOdl_I072IMtEIUh70n_n81WC8lgw-uKy1a-gL8aN1O2MOEiOIg=w300");
+            app.put("playStoreUrl", "https://play.google.com/store/apps/details?id=com.ea.game.simpsons4_na");
+
+            result.add(app);
+        }
+        catch (JSONException e)
+        {
+            Log.d("getSampleRecApps", e.getLocalizedMessage());
         }
 
         return result;

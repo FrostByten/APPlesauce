@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
 {
@@ -31,6 +32,38 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
 
         HttpClient httpClient = new DefaultHttpClient();
         ArrayList<AppInfo> recAppList = new ArrayList<AppInfo>();
+
+
+        // This code will use sample JSONObject from the sample class to save queries from
+        // PlaystoreAPI key
+        Iterator<JSONObject> it = Sample.getSampleRecApps().iterator();
+        while(it.hasNext())
+        {
+            JSONObject JSONtestApp = it.next();
+
+            try
+            {
+                System.out.println(JSONtestApp.getString("packageID"));
+                System.out.println(JSONtestApp.getString("appName"));
+
+                recAppList.add(new AppInfo(JSONtestApp.getString("appName"),
+                                           JSONtestApp.getString("packageID"),
+                                           null,
+                                           0,
+                                           createDrawableFromUrl(JSONtestApp.getString("logo"))));
+            }
+            catch(Exception e)
+            {
+                Log.d("AsyncAppDetail", "Sample apps");
+            }
+        }
+
+        return recAppList;
+        // End of sample query
+
+        /* Uncomment this when ready for actual process
+        // End of sample
+
         //Iterator<String> it = recApp_packageName.iterator();
 
         //while(it.hasNext())
@@ -85,6 +118,9 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
         }
 
         return recAppList;
+
+        // End of actual process
+        */
     }
 
     public Drawable createDrawableFromUrl(String imageURL)
@@ -170,7 +206,14 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
     @Override
     protected ArrayList<AppInfo> doInBackground(String... packageName)
     {
-        return getAppInfo(getRecAppsFromJSONFeed(packageName[0]));
+        // Uncomment this for actual process
+        //return getAppInfo(getRecAppsFromJSONFeed(packageName[0]));
+        // End of actual process
+
+        // Using Sample class for test query
+        return getAppInfo(null);
+        // End of test query
+
     }
 
     @Override
