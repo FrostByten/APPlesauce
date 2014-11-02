@@ -23,7 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 
 
-public class main extends Activity implements SearchView.OnQueryTextListener
+public class Main extends Activity implements SearchView.OnQueryTextListener
 {
 
     ListView lv;
@@ -83,8 +83,11 @@ public class main extends Activity implements SearchView.OnQueryTextListener
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
                 String app = apps.get(position).getName();
-                Toast.makeText(getApplicationContext(), "Selected : "+ app,   Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(main.this, recommendations.class);
+
+                Intent i = new Intent(Main.this, Recommendations.class);
+                i.putExtra("PACKAGE_NAME", apps.get(position).getPName());
+
+                Toast.makeText(getApplicationContext(), "Selected : " + app + " " + apps.get(position).getPName(), Toast.LENGTH_SHORT).show();
                 startActivity(i);
             }
         });
@@ -120,7 +123,7 @@ public class main extends Activity implements SearchView.OnQueryTextListener
 
     void openAll()
     {
-        Intent i = new Intent(main.this, recommendations.class);
+        Intent i = new Intent(Main.this, Recommendations.class);
         startActivity(i);
     }
 

@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class applink extends Activity {
+public class Applink extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

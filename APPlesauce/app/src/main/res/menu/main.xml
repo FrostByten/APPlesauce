@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".main" >
+    tools:context="ca.bcit.comp3717.applesauce.Main" >
 
     <item android:id="@+id/action_all"
         android:icon="@drawable/ic_action_all"
