@@ -9,13 +9,6 @@
     android:orientation="vertical"
     tools:context="ca.bcit.comp3717.applesauce.IgnoreApps">
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/doneButton"
-        android:text="@string/done"
-        android:onClick="onClickDone" />
-
     <SearchView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

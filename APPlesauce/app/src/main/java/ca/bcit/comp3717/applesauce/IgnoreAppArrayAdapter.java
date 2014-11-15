@@ -3,6 +3,7 @@ package ca.bcit.comp3717.applesauce;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
 {
     private final Context context;
-    private final List<String> values;
-    private final List<Drawable> images;
+    private List<String> values;
+    private List<Drawable> images;
+    private List<String> origValues;
+    private List<Drawable> origImages;
     private final IgnoredAppDataSource datasource = new IgnoredAppDataSource(getContext());
 
     public IgnoreAppArrayAdapter(Context context, List<String> values, List<Drawable> images)
@@ -28,6 +32,67 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
         this.context = context;
         this.values = values;
         this.images = images;
+    }
+
+    public android.widget.Filter getFilter() {
+        return new android.widget.Filter() {
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<Pair<String, Drawable>> results = new ArrayList<Pair<String, Drawable>>();
+
+                if (origValues == null && origImages == null)
+                {
+                    origValues = values;
+                    origImages = images;
+                }
+                if (constraint != null) {
+                    if (origValues != null && origValues.size() > 0) {
+
+                        for (int i = 0; i < origValues.size(); i++)
+                        {
+                            if(origValues.get(i).toLowerCase().contains(constraint.toString().toLowerCase()))
+                            {
+                                System.out.println("found " + origValues.get(i).toLowerCase());
+                                results.add(Pair.create(origValues.get(i),origImages.get(i)));
+                            }
+                        }
+                    }
+
+                    oReturn.values = results;
+                }
+                return oReturn;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results)
+            {
+
+                ArrayList<Pair<String, Drawable>> temp = (ArrayList<Pair<String, Drawable>>) results.values;
+
+                values = new ArrayList<String>();
+                images = new ArrayList<Drawable>();
+
+                for(int i = 0; i < temp.size(); i++)
+                {
+                    values.add((temp.get(i)).first);
+                    images.add((temp.get(i)).second);
+                }
+
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getCount() {
+        return values.size();
     }
 
     @Override
@@ -94,28 +159,6 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
                     }
                     datasource.close();
                 }
-
-                // For Debugging
-                //try
-                //{
-                //    datasource.open();
-                //    List<Ignored> ignored = datasource.getAllIgnoredApps();
-
-                //    for (Ignored i : ignored) {
-                //        Toast.makeText(getContext(), "Ignored" + i.getAppName(), Toast.LENGTH_LONG).show();
-                //    }
-                //    datasource.close();
-                //}
-                //catch(NullPointerException e)
-                //{
-                //    Toast.makeText(getContext(), "No Ignored Apps", Toast.LENGTH_LONG).show();
-                //}
-                //catch(SQLException e)
-                //{
-                //    Toast.makeText(getContext(), "SQLException", Toast.LENGTH_LONG).show();
-                //}
-
-
             }
         });
 

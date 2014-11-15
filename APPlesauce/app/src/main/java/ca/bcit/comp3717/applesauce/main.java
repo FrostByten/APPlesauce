@@ -127,7 +127,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         }
         catch(SQLException e)
         {
-            Log.d("Main: onRestart open failed", e.getLocalizedMessage());
+            Log.d("Main: onResume open failed", e.getLocalizedMessage());
         }
 
         for(int i = 0; i < apps.size(); i++)
@@ -142,8 +142,6 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
 
         ladapt = new AppArrayAdapter(this, names, icons);
         lv.setAdapter(ladapt);
-
-        //ladapt.notifyDataSetChanged();
     }
 
     @Override
@@ -161,7 +159,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         switch (item.getItemId())
         {
             case R.id.action_all:
-                openAll();
+                //openAll();
                 return true;
             case R.id.action_settings:
                 if(dl.isDrawerOpen(drawerlv))
@@ -174,6 +172,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         }
     }
 
+    // Cannot use this at the moment as Recommendations needs a package name
     void openAll()
     {
         Intent i = new Intent(Main.this, Recommendations.class);

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -66,16 +65,11 @@ public class IgnoreApps extends Activity implements SearchView.OnQueryTextListen
         lv.setAdapter(ladapt);
     }
 
-    public void onClickDone(View v)
-    {
-        finish();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        inflater.inflate(R.menu.ignore_apps, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -86,9 +80,9 @@ public class IgnoreApps extends Activity implements SearchView.OnQueryTextListen
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
         return super.onOptionsItemSelected(item);
     }
 

@@ -33,7 +33,8 @@
         <activity
             android:name=".IgnoreApps"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_ignore_apps" >
+            android:label="@string/title_activity_ignore_apps"
+            android:parentActivityName=".Main" >
         </activity>
     </application>
 
