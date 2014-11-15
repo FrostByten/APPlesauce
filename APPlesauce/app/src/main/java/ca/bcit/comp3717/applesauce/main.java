@@ -38,7 +38,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
 
     static ArrayList<AppInfo> apps;
 
-    String[] draweritems = {"Ignore Apps", "Item 2", "Item 3", "Item 4", "Item 5"};
+    String[] draweritems = {"Filter Apps", "Item 2", "Item 3", "Item 4", "Item 5"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,7 +57,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         sv.setIconifiedByDefault(false);
         sv.setOnQueryTextListener(this);
         sv.setSubmitButtonEnabled(true);
-        sv.setQueryHint("Filter");
+        sv.setQueryHint("Search");
 
         lv = (ListView)findViewById(R.id.listView);
         lv.setTextFilterEnabled(true);

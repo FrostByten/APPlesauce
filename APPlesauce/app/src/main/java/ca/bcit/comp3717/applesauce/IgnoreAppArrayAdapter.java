@@ -51,11 +51,11 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
             datasource.open();
             if(datasource.checkIfIgnored(appname))
             {
-                ignoreCB.setChecked(true);
+                ignoreCB.setChecked(false);
             }
             else
             {
-                ignoreCB.setChecked(false);
+                ignoreCB.setChecked(true);
             }
         }
         catch(SQLException e)
@@ -72,7 +72,8 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
                     try
                     {
                         datasource.open();
-                        datasource.ignoreApp(textView.getText().toString());
+                        datasource.deleteIgnoredApp(textView.getText().toString());
+
                     }
                     catch (SQLException e)
                     {
@@ -85,7 +86,7 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
                     try
                     {
                         datasource.open();
-                        datasource.deleteIgnoredApp(textView.getText().toString());
+                        datasource.ignoreApp(textView.getText().toString());
                     }
                     catch (SQLException e)
                     {
