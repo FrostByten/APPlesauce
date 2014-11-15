@@ -7,5 +7,7 @@
     <string name="title_activity_recommendations">Recommendations</string>
     <string name="title_activity_applink">applink</string>
     <string name="placeholder">placeholder</string>
+    <string name="title_activity_ignore_apps">Ignore Applications</string>
+    <string name="done">DONE</string>
 
 </resources>

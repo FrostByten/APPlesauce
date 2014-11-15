@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,9 +31,14 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
     SearchView sv;
     DrawerLayout dl;
     ListView drawerlv;
+    List<String> names = new ArrayList<String>();
+    List<Drawable> icons = new ArrayList<Drawable>();
+    private ArrayAdapter<String> ladapt;
+    private final IgnoredAppDataSource datasource = new IgnoredAppDataSource(this);
+
     static ArrayList<AppInfo> apps;
 
-    String[] draweritems = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
+    String[] draweritems = {"Ignore Apps", "Item 2", "Item 3", "Item 4", "Item 5"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,8 +63,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         lv.setTextFilterEnabled(true);
 
         apps = ApplicationLister.getInstalledApps(getPackageManager());
-        List<String> names = new ArrayList<String>();
-        List<Drawable> icons = new ArrayList<Drawable>();
+
 
         Collections.sort(apps, new Comparator<AppInfo>()
         {
@@ -68,14 +73,29 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
             }
         });
 
+        // Do not display ignored apps
+        try
+        {
+            datasource.open();
+        }
+        catch(SQLException e)
+        {
+            Log.d("IgnoreApps: onCreate ", e.getLocalizedMessage());
+        }
+
+        // Populate names and icons
         for(int i = 0; i < apps.size(); i++)
         {
             Log.i("Info", apps.get(i).getName() + " v" + apps.get(i).getVersionCode());
-            names.add(apps.get(i).getName());
-            icons.add(apps.get(i).getIcon());
+            if(!datasource.checkIfIgnored(apps.get(i).getName()))
+            {
+                names.add(apps.get(i).getName());
+                icons.add(apps.get(i).getIcon());
+            }
         }
+        datasource.close();
 
-        ArrayAdapter<String> ladapt = new AppArrayAdapter(this, names, icons);
+        ladapt = new AppArrayAdapter(this, names, icons);
         lv.setAdapter(ladapt);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -91,6 +111,39 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        names = new ArrayList<String>();
+        icons = new ArrayList<Drawable>();
+
+        try
+        {
+            datasource.open();
+        }
+        catch(SQLException e)
+        {
+            Log.d("Main: onRestart open failed", e.getLocalizedMessage());
+        }
+
+        for(int i = 0; i < apps.size(); i++)
+        {
+            if(!datasource.checkIfIgnored(apps.get(i).getName()))
+            {
+                names.add(apps.get(i).getName());
+                icons.add(apps.get(i).getIcon());
+            }
+        }
+        datasource.close();
+
+        ladapt = new AppArrayAdapter(this, names, icons);
+        lv.setAdapter(ladapt);
+
+        //ladapt.notifyDataSetChanged();
     }
 
     @Override
@@ -134,7 +187,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         {
             lv.clearTextFilter();
         } else {
-            lv.setFilterText(newText.toString());
+            lv.setFilterText(newText);
         }
         return true;
     }
@@ -149,6 +202,8 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
             //Toast.makeText(getApplicationContext(), position, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(Main.this, IgnoreApps.class);
+            startActivity(i);
         }
     }
 }

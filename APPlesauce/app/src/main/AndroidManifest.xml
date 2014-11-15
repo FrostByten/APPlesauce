@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.bcit.comp3717.applesauce" >
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -28,6 +29,10 @@
         <activity
             android:name=".Applink"
             android:label="@string/title_activity_applink" >
+        </activity>
+        <activity
+            android:name=".IgnoreApps"
+            android:label="@string/title_activity_ignore_apps" >
         </activity>
     </application>
 
