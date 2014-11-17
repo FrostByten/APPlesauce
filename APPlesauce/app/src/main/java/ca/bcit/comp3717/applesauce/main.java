@@ -3,6 +3,7 @@ package ca.bcit.comp3717.applesauce;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
@@ -22,9 +23,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 
-public class Main extends Activity implements SearchView.OnQueryTextListener
+public class Main extends Activity implements SearchView.OnQueryTextListener, AppDetailResponse
 {
 
     ListView lv;
@@ -33,12 +35,17 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
     ListView drawerlv;
     List<String> names = new ArrayList<String>();
     List<Drawable> icons = new ArrayList<Drawable>();
+
     private ArrayAdapter<String> ladapt;
     private final IgnoredAppDataSource datasource = new IgnoredAppDataSource(this);
 
     static ArrayList<AppInfo> apps;
 
-    String[] draweritems = {"Filter Apps", "Item 2", "Item 3", "Item 4", "Item 5"};
+    // Added for I'm Feeling Lucky!
+    //AsyncAppDetail getRecApps = new AsyncAppDetail();
+    private final static String GOOGLEPLAY = "http://play.google.com/store/apps/details?id=";
+
+    String[] draweritems = {"Filter Apps", "I'm Feeling Lucky!", "Item 3", "Item 4", "Item 5"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -159,7 +166,10 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         switch (item.getItemId())
         {
             case R.id.action_all:
-                //openAll();
+                Toast.makeText(getApplicationContext(), "Lucky Recommendation", Toast.LENGTH_SHORT).show();
+                Random r = new Random();
+                int randomApp = r.nextInt(apps.size());
+                LuckyApp(randomApp);
                 return true;
             case R.id.action_settings:
                 if(dl.isDrawerOpen(drawerlv))
@@ -196,13 +206,45 @@ public class Main extends Activity implements SearchView.OnQueryTextListener
         return false;
     }
 
+    private void LuckyApp(int randomAppRecommendation)
+    {
+        String app = apps.get(randomAppRecommendation).getName();
+        AsyncAppDetail getRecApps = new AsyncAppDetail();
+        getRecApps.delegate = this;
+
+        getRecApps.execute(apps.get(randomAppRecommendation).getPName());
+    }
+
+    // Get results from recommendation asyncappdetail
+    public void processFinish(final ArrayList<AppInfo> recApps)
+    {
+        Random r = new Random();
+        int randomApp = r.nextInt(recApps.size());
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(GOOGLEPLAY + recApps.get(randomApp).getPName()));
+        startActivity(intent);
+    }
+
     class DrawerItemClickListener implements AdapterView.OnItemClickListener
     {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
-            //Toast.makeText(getApplicationContext(), position, Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(Main.this, IgnoreApps.class);
-            startActivity(i);
+            switch(position)
+            {
+                case 0: // Filter Apps
+                {
+                    Intent i = new Intent(Main.this, IgnoreApps.class);
+                    startActivity(i);
+                    break;
+                }
+                case 1: // I'm feeling lucky
+                {
+                    Random r = new Random();
+                    int randomApp = r.nextInt(apps.size());
+                    LuckyApp(randomApp);
+                }
+            }
         }
     }
 }
