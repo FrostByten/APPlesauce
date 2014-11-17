@@ -45,7 +45,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
     //AsyncAppDetail getRecApps = new AsyncAppDetail();
     private final static String GOOGLEPLAY = "http://play.google.com/store/apps/details?id=";
 
-    String[] draweritems = {"Filter Apps", "I'm Feeling Lucky!", "Item 3", "Item 4", "Item 5"};
+    String[] draweritems = {"Filter Apps", "I'm Feeling Lucky!", "Achievements", "Item 4", "Item 5"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -141,7 +141,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
         {
             if(!datasource.checkIfIgnored(apps.get(i).getName()))
             {
-                names.add(apps.get(i).getName());
+                names.add(apps.get(i).getName() + "                                         ");
                 icons.add(apps.get(i).getIcon());
             }
         }
@@ -243,6 +243,12 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
                     Random r = new Random();
                     int randomApp = r.nextInt(apps.size());
                     LuckyApp(randomApp);
+                }
+                case 2: //Achievements
+                {
+                    Intent i = new Intent(Main.this, Achievements.class);
+                    Toast.makeText(getApplicationContext(), "Achievements selected", Toast.LENGTH_SHORT).show();
+                    startActivity(i);
                 }
             }
         }

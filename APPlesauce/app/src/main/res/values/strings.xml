@@ -8,5 +8,7 @@
     <string name="title_activity_applink">applink</string>
     <string name="placeholder">placeholder</string>
     <string name="title_activity_ignore_apps">Filter Apps</string>
+    <string name="title_activity_achievements">Achievements</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

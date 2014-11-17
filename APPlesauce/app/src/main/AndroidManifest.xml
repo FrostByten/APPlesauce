@@ -32,9 +32,13 @@
         </activity>
         <activity
             android:name=".IgnoreApps"
-            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_ignore_apps"
-            android:parentActivityName=".Main" >
+            android:parentActivityName=".Main"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".Achievements"
+            android:label="@string/title_activity_achievements" >
         </activity>
     </application>
 
