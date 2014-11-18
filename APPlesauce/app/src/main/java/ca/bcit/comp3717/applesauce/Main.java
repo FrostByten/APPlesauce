@@ -40,12 +40,15 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
     private final IgnoredAppDataSource datasource = new IgnoredAppDataSource(this);
 
     static ArrayList<AppInfo> apps;
+    public static int chievecheck = 0;
+    public static int luckycheck = 0;
+    public static int gocount = 0;
 
     // Added for I'm Feeling Lucky!
     //AsyncAppDetail getRecApps = new AsyncAppDetail();
     private final static String GOOGLEPLAY = "http://play.google.com/store/apps/details?id=";
 
-    String[] draweritems = {"Filter Apps", "I'm Feeling Lucky!", "Achievements", "Item 4", "Item 5"};
+    String[] draweritems = {"Filter Apps", "I'm Feeling Lucky!", "Achievements"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -104,6 +107,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
 
         ladapt = new AppArrayAdapter(this, names, icons);
         lv.setAdapter(ladapt);
+
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -167,9 +171,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
         {
             case R.id.action_all:
                 Toast.makeText(getApplicationContext(), "Lucky Recommendation", Toast.LENGTH_SHORT).show();
-                Random r = new Random();
-                int randomApp = r.nextInt(apps.size());
-                LuckyApp(randomApp);
+                lucky();
                 return true;
             case R.id.action_settings:
                 if(dl.isDrawerOpen(drawerlv))
@@ -180,6 +182,23 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    void lucky()
+    {
+        luckycheck++;
+        if(luckycheck == 1)
+            AchievementDataSource.makeChieve(Main.this, "Up all night", "Get lucky");
+        else if(luckycheck == 5)
+            AchievementDataSource.makeChieve(Main.this, "Lady's man", "Get lucky 5 times");
+        else if(luckycheck == 10)
+        AchievementDataSource.makeChieve(Main.this, "Pimp", "Get lucky 10 times");
+        if(luckycheck == 25)
+            AchievementDataSource.makeChieve(Main.this, "Hugh Hefner", "Get lucky 25 times");
+
+        Random r = new Random();
+        int randomApp = r.nextInt(apps.size());
+        LuckyApp(randomApp);
     }
 
     // Cannot use this at the moment as Recommendations needs a package name
@@ -240,15 +259,35 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
                 }
                 case 1: // I'm feeling lucky
                 {
-                    Random r = new Random();
-                    int randomApp = r.nextInt(apps.size());
-                    LuckyApp(randomApp);
+                    lucky();
+                    break;
                 }
                 case 2: //Achievements
                 {
+                    chievecheck++;
+                    if(chievecheck == 1)
+                        AchievementDataSource.makeChieve(Main.this, "First-timer", "Checked your achievements");
+                    else if(chievecheck == 5)
+                        AchievementDataSource.makeChieve(Main.this, "Eager", "Checked your achievements 5 times");
+                    else if(chievecheck == 10)
+                        AchievementDataSource.makeChieve(Main.this, "Agog", "Checked your achievements 10 times");
+                    else if(chievecheck == 25)
+                        AchievementDataSource.makeChieve(Main.this, "Obsessive", "Checked your achievements 25 times");
+                    else if(chievecheck == 100)
+                        AchievementDataSource.makeChieve(Main.this, "Ridiculous", "Checked your achievements 100 times");
+                    System.out.println("Achievements selected");
+
+                    /*AchievementDataSource datasource = new AchievementDataSource(Main.this);
+                    try { datasource.open(); }
+                    catch(SQLException e) { Log.d("Achievements: Add ", e.getLocalizedMessage()); }
+                    if(datasource.addAchievement("Checked your achievements"))
+                        Toast.makeText(Main.this, "Achievement Unlocked!", Toast.LENGTH_SHORT).show();
+                    datasource.close();*/
+
                     Intent i = new Intent(Main.this, Achievements.class);
-                    Toast.makeText(getApplicationContext(), "Achievements selected", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Achievements selected", Toast.LENGTH_SHORT).show();
                     startActivity(i);
+                    break;
                 }
             }
         }

@@ -46,7 +46,7 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
                 System.out.println(JSONtestApp.getString("packageID"));
                 System.out.println(JSONtestApp.getString("appName"));
 
-                recAppList.add(new AppInfo(JSONtestApp.getString("appName"),
+                recAppList.add(new AppInfo(JSONtestApp.getString("appName") + "                                               ",
                                            JSONtestApp.getString("packageID"),
                                            null,
                                            0,

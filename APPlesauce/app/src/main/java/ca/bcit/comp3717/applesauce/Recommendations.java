@@ -77,6 +77,12 @@ public class Recommendations extends Activity
                 // debug
                 Toast.makeText(getApplicationContext(), "Selected : " + app.getName(), Toast.LENGTH_SHORT).show();
 
+                Main.gocount++;
+                if(Main.gocount == 1)
+                AchievementDataSource.makeChieve(Recommendations.this, "Give it a go", "Check out 1 app");
+                else if(Main.gocount == 5)
+                    AchievementDataSource.makeChieve(Recommendations.this, "Give it a good go", "Check out 5 apps");
+
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(GOOGLEPLAY + app.getPName()));
                 startActivity(intent);
