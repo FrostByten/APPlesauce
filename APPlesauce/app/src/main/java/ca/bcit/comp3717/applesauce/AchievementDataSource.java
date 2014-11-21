@@ -117,8 +117,8 @@ public class AchievementDataSource {
             cursor.close();
         }
 
-        for(String s:ignoredApps)
-            System.out.println("Achievement: " + s);
+        //for(String s:ignoredApps)
+            //System.out.println("Achievement: " + s);
 
         return ignoredApps;
     }
@@ -150,8 +150,8 @@ public class AchievementDataSource {
             cursor.close();
         }
 
-        for(String s:ignoredApps)
-            System.out.println("Description: " + s);
+        //for(String s:ignoredApps)
+            //System.out.println("Description: " + s);
 
         return ignoredApps;
     }

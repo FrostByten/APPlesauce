@@ -260,11 +260,13 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
                 {
                     Intent i = new Intent(Main.this, IgnoreApps.class);
                     startActivity(i);
+                    dl.closeDrawers();
                     break;
                 }
                 case 1: // I'm feeling lucky
                 {
                     lucky();
+                    dl.closeDrawers();
                     break;
                 }
                 case 2: //Achievements
@@ -283,6 +285,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
 
                     Intent i = new Intent(Main.this, Achievements.class);
                     startActivity(i);
+                    dl.closeDrawers();
                     break;
                 }
             }

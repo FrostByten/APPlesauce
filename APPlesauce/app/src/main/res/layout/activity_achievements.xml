@@ -27,6 +27,7 @@
         android:layout_centerHorizontal="true"
         android:minWidth="500dp"
         android:maxWidth="500dp"
-        android:onClick="resetChieves" />
+        android:onClick="resetChieves"
+        android:minHeight="100dp" />
 
 </RelativeLayout>
