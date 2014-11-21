@@ -1,6 +1,7 @@
 package ca.bcit.comp3717.applesauce;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -16,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,6 +43,11 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
     public static int chievecheck = 0;
     public static int luckycheck = 0;
     public static int gocount = 0;
+    public static int ignorecount = 0;
+    public static int chievecount = 0;
+    public static int unignorecount = 0;
+
+    public static Context c;
 
     // Added for I'm Feeling Lucky!
     //AsyncAppDetail getRecApps = new AsyncAppDetail();
@@ -73,7 +78,6 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
         lv.setTextFilterEnabled(true);
 
         apps = ApplicationLister.getInstalledApps(getPackageManager());
-
 
         Collections.sort(apps, new Comparator<AppInfo>()
         {
@@ -118,7 +122,6 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
                 Intent i = new Intent(Main.this, Recommendations.class);
                 i.putExtra("PACKAGE_NAME", apps.get(position).getPName());
 
-                Toast.makeText(getApplicationContext(), "Selected : " + app + " " + apps.get(position).getPName(), Toast.LENGTH_SHORT).show();
                 startActivity(i);
             }
         });
@@ -131,6 +134,9 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
 
         names = new ArrayList<String>();
         icons = new ArrayList<Drawable>();
+
+        c = this.getApplicationContext();
+        AchievementDataSource.makeChieve(Main.this, "Connoisseur", "Open APPlesauce");
 
         try
         {
@@ -170,7 +176,6 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
         switch (item.getItemId())
         {
             case R.id.action_all:
-                Toast.makeText(getApplicationContext(), "Lucky Recommendation", Toast.LENGTH_SHORT).show();
                 lucky();
                 return true;
             case R.id.action_settings:
@@ -190,7 +195,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
         if(luckycheck == 1)
             AchievementDataSource.makeChieve(Main.this, "Up all night", "Get lucky");
         else if(luckycheck == 5)
-            AchievementDataSource.makeChieve(Main.this, "Lady's man", "Get lucky 5 times");
+            AchievementDataSource.makeChieve(Main.this, "Ladies man", "Get lucky 5 times");
         else if(luckycheck == 10)
         AchievementDataSource.makeChieve(Main.this, "Pimp", "Get lucky 10 times");
         if(luckycheck == 25)
@@ -275,17 +280,8 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
                         AchievementDataSource.makeChieve(Main.this, "Obsessive", "Checked your achievements 25 times");
                     else if(chievecheck == 100)
                         AchievementDataSource.makeChieve(Main.this, "Ridiculous", "Checked your achievements 100 times");
-                    System.out.println("Achievements selected");
-
-                    /*AchievementDataSource datasource = new AchievementDataSource(Main.this);
-                    try { datasource.open(); }
-                    catch(SQLException e) { Log.d("Achievements: Add ", e.getLocalizedMessage()); }
-                    if(datasource.addAchievement("Checked your achievements"))
-                        Toast.makeText(Main.this, "Achievement Unlocked!", Toast.LENGTH_SHORT).show();
-                    datasource.close();*/
 
                     Intent i = new Intent(Main.this, Achievements.class);
-                    //Toast.makeText(getApplicationContext(), "Achievements selected", Toast.LENGTH_SHORT).show();
                     startActivity(i);
                     break;
                 }

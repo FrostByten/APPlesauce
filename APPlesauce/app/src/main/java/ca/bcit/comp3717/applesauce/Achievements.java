@@ -97,7 +97,10 @@ public class Achievements extends Activity {
         Main.chievecheck = 0;
         Main.luckycheck = 0;
         Main.gocount = 0;
+        Main.ignorecount = 0;
+        Main.chievecount = 0;
         Toast.makeText(this, "Reset achievements...", Toast.LENGTH_SHORT).show();
+        AchievementDataSource.makeChieve(Main.c, "Clean slate", "Reset your achievements");
         finish();
     }
 }

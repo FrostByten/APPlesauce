@@ -138,6 +138,15 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
                     {
                         datasource.open();
                         datasource.deleteIgnoredApp(textView.getText().toString());
+                        Main.unignorecount++;
+                        if(Main.unignorecount == 1)
+                            AchievementDataSource.makeChieve(getContext(), "Never mind", "Un-ignore an app");
+                        else if(Main.unignorecount == 5)
+                            AchievementDataSource.makeChieve(getContext(), "Not that bad", "Un-ignore 5 apps");
+                        else if(Main.unignorecount == 10)
+                            AchievementDataSource.makeChieve(getContext(), "I guess you can live with it", "Un-ignore 10 apps");
+                        else if(Main.unignorecount == 25)
+                            AchievementDataSource.makeChieve(getContext(), "Enable ALL the apps!", "Un-ignore 25 apps");
 
                     }
                     catch (SQLException e)
@@ -152,6 +161,15 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
                     {
                         datasource.open();
                         datasource.ignoreApp(textView.getText().toString());
+                        Main.ignorecount++;
+                        if(Main.ignorecount == 1)
+                            AchievementDataSource.makeChieve(getContext(), "Do not want", "Ignore an app");
+                        else if(Main.ignorecount == 5)
+                            AchievementDataSource.makeChieve(getContext(), "Hate", "Ignore 5 apps");
+                        else if(Main.ignorecount == 10)
+                            AchievementDataSource.makeChieve(getContext(), "Disgust", "Ignore 10 apps");
+                        else if(Main.ignorecount == 25)
+                            AchievementDataSource.makeChieve(getContext(), "You might as well uninstall it", "Ignore 25 apps");
                     }
                     catch (SQLException e)
                     {

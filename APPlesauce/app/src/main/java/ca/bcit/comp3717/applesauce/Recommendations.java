@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,8 +30,6 @@ public class Recommendations extends Activity
         getRecApps.delegate = this;
 
         Bundle extras = getIntent().getExtras();
-        //debug
-        Toast.makeText(getApplicationContext(), extras.getString("PACKAGE_NAME"), Toast.LENGTH_LONG).show();
 
         // For emulator use only. extras.getString("PACKAGE_NAME") for real android device with
         // google play apps
@@ -74,14 +71,15 @@ public class Recommendations extends Activity
             {
                 AppInfo app = recApps.get(position);
 
-                // debug
-                Toast.makeText(getApplicationContext(), "Selected : " + app.getName(), Toast.LENGTH_SHORT).show();
-
                 Main.gocount++;
                 if(Main.gocount == 1)
                 AchievementDataSource.makeChieve(Recommendations.this, "Give it a go", "Check out 1 app");
                 else if(Main.gocount == 5)
                     AchievementDataSource.makeChieve(Recommendations.this, "Give it a good go", "Check out 5 apps");
+                else if(Main.gocount == 10)
+                    AchievementDataSource.makeChieve(Recommendations.this, "Give it some wellie", "Check out 10 apps");
+                else if(Main.gocount == 25)
+                    AchievementDataSource.makeChieve(Recommendations.this, "Master of apps", "Check out 25 apps");
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(GOOGLEPLAY + app.getPName()));

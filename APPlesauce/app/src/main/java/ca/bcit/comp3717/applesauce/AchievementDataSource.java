@@ -74,13 +74,20 @@ public class AchievementDataSource {
                 null,
                 values);
 
+        Main.chievecount++;
+        if(Main.chievecount == 1)
+            AchievementDataSource.makeChieve(Main.c, "Much achievement...", "Earn an achievement");
+        else if(Main.chievecount == 5)
+            AchievementDataSource.makeChieve(Main.c, "...Such hunter...", "Earn 5 achievements");
+        else if(Main.chievecount == 10)
+            AchievementDataSource.makeChieve(Main.c, "Wow.", "Earn 10 achievements");
+
         return true;
     }
 
     public void resetAchievements()
     {
         database.delete(AchievementSQLHelper.TABLE_NAME, "1=1", null);
-        System.out.println("Reset achievements");
     }
 
     public List<String> getAllIgnoredApps()
