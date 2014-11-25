@@ -10,5 +10,73 @@
     <string name="title_activity_ignore_apps">Filter Apps</string>
     <string name="title_activity_achievements">Achievements</string>
     <string name="reset">Reset Achievements</string>
+    <string name="achievements">Achievements</string>
+    <string name="lucky">I\'m Feeling Lucky!</string>
+    <string name="filter">Filter Apps</string>
+    <string name="googleplay">http://play.google.com/store/apps/details?id=</string>
+    <string name="packname">PACKAGE_NAME</string>
+    <string name="query">Search</string>
+    <string name="unlocked">Achievement unlocked: </string>
 
+    <string name="firsttimename">First-timer</string>
+    <string name="firsttimedesc">Checked your achievements</string>
+    <string name="eagername">Eager</string>
+    <string name="eagerdesc">Checked your achievements 5 times</string>
+    <string name="agogname">Agog</string>
+    <string name="agogdesc">Checked your achievements 10 times</string>
+    <string name="obsname">Obsessive</string>
+    <string name="obsdesc">Checked your achievements 25 times</string>
+    <string name="ridname">Ridiculous</string>
+    <string name="riddesc">Checked your achievements 100 times</string>
+
+    <string name="upallnightname">Up all night</string>
+    <string name="upallnightdesc">Get lucky</string>
+    <string name="ladiesname">Ladies man</string>
+    <string name="ladiesdesc">Get lucky 5 times</string>
+    <string name="pimpname">Pimp</string>
+    <string name="pimpdesc">Get lucky 10 times</string>
+    <string name="hughname">Hugh Hefner</string>
+    <string name="hughdesc">Get lucky 25 times</string>
+
+    <string name="conname">Connoisseur</string>
+    <string name="condesc">Open APPlesauce</string>
+
+    <string name="muchname">Much achievement...</string>
+    <string name="muchdesc">Earn an achievement</string>
+    <string name="suchname">...Such hunter...</string>
+    <string name="suchdesc">Earn 5 achievements</string>
+    <string name="wowname">Wow.</string>
+    <string name="wowdesc">Earn 10 achievements</string>
+    <string name="getalifename">Get a life...</string>
+    <string name="getalifedesc">Earn 20 achievements</string>
+
+    <string name="cleanname">Clean slate</string>
+    <string name="cleandesc">Reset your achievements</string>
+
+    <string name="nevername">Never mind</string>
+    <string name="neverdesc">Un-ignore an app</string>
+    <string name="notthatname">Not that bad</string>
+    <string name="notthatdesc">Un-ignore 5 apps</string>
+    <string name="iguessname">I guess you can live with it</string>
+    <string name="iguessdesc">Un-ignore 10 apps</string>
+    <string name="enablename">Enable ALL the apps!</string>
+    <string name="enabledesc">Un-ignore 25 apps</string>
+
+    <string name="donotname">Do not want</string>
+    <string name="donotdesc">Ignore an app</string>
+    <string name="hatename">Hate</string>
+    <string name="hatedesc">Ignore 5 apps</string>
+    <string name="disgustname">Disgust</string>
+    <string name="disgustdesc">Ignore 10 apps</string>
+    <string name="youmightname">You might as well uninstall it</string>
+    <string name="youmightdesc">Ignore 25 apps</string>
+
+    <string name="givegoname">Give it a go</string>
+    <string name="givegodesc">Check out 1 app</string>
+    <string name="goodgoname">Give it a good go</string>
+    <string name="goodgodesc">Check out 5 apps</string>
+    <string name="welliename">Give it some wellie</string>
+    <string name="welliedesc">Check out 10 apps</string>
+    <string name="mastername">Master of apps</string>
+    <string name="masterdesc">Check out 25 apps</string>
 </resources>

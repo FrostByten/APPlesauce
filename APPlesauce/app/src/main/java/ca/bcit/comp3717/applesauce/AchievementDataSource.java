@@ -55,13 +55,12 @@ public class AchievementDataSource {
         try { datasource.open(); }
         catch(SQLException e) { Log.d("Achievements: Add ", e.getLocalizedMessage()); }
         if(datasource.addAchievement(name, desc))
-            Toast.makeText(c, "Achievement unlocked: " + name, Toast.LENGTH_SHORT).show();
+            Toast.makeText(c, Main.c.getString(R.string.unlocked) + name, Toast.LENGTH_SHORT).show();
         datasource.close();
     }
 
     public boolean addAchievement(String name, String desc)
     {
-        System.out.println("Creating chieve");
         ContentValues values = new ContentValues();
 
         if(checkIfIgnored(name))
@@ -76,11 +75,13 @@ public class AchievementDataSource {
 
         Main.chievecount++;
         if(Main.chievecount == 1)
-            AchievementDataSource.makeChieve(Main.c, "Much achievement...", "Earn an achievement");
+            AchievementDataSource.makeChieve(Main.c, Main.c.getString(R.string.muchname), Main.c.getString(R.string.muchdesc));
         else if(Main.chievecount == 5)
-            AchievementDataSource.makeChieve(Main.c, "...Such hunter...", "Earn 5 achievements");
+            AchievementDataSource.makeChieve(Main.c, Main.c.getString(R.string.suchname), Main.c.getString(R.string.suchdesc));
         else if(Main.chievecount == 10)
-            AchievementDataSource.makeChieve(Main.c, "Wow.", "Earn 10 achievements");
+            AchievementDataSource.makeChieve(Main.c, Main.c.getString(R.string.wowname), Main.c.getString(R.string.wowdesc));
+        else if(Main.chievecount == 20)
+            AchievementDataSource.makeChieve(Main.c, Main.c.getString(R.string.getalifename), Main.c.getString(R.string.getalifedesc));
 
         return true;
     }
@@ -117,9 +118,6 @@ public class AchievementDataSource {
             cursor.close();
         }
 
-        //for(String s:ignoredApps)
-            //System.out.println("Achievement: " + s);
-
         return ignoredApps;
     }
 
@@ -149,9 +147,6 @@ public class AchievementDataSource {
         {
             cursor.close();
         }
-
-        //for(String s:ignoredApps)
-            //System.out.println("Description: " + s);
 
         return ignoredApps;
     }

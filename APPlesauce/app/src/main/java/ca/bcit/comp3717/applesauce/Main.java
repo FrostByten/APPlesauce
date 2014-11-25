@@ -51,15 +51,18 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
 
     // Added for I'm Feeling Lucky!
     //AsyncAppDetail getRecApps = new AsyncAppDetail();
-    private final static String GOOGLEPLAY = "http://play.google.com/store/apps/details?id=";
 
-    String[] draweritems = {"Filter Apps", "I'm Feeling Lucky!", "Achievements"};
+    String[] draweritems = new String[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        draweritems[0] = getString(R.string.filter);
+        draweritems[1] = getString(R.string.lucky);
+        draweritems[2] = getString(R.string.achievements);
 
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -72,7 +75,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
         sv.setIconifiedByDefault(false);
         sv.setOnQueryTextListener(this);
         sv.setSubmitButtonEnabled(true);
-        sv.setQueryHint("Search");
+        sv.setQueryHint(getString(R.string.query));
 
         lv = (ListView)findViewById(R.id.listView);
         lv.setTextFilterEnabled(true);
@@ -120,7 +123,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
                 String app = apps.get(position).getName();
 
                 Intent i = new Intent(Main.this, Recommendations.class);
-                i.putExtra("PACKAGE_NAME", apps.get(position).getPName());
+                i.putExtra(getString(R.string.packname), apps.get(position).getPName());
 
                 startActivity(i);
             }
@@ -136,7 +139,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
         icons = new ArrayList<Drawable>();
 
         c = this.getApplicationContext();
-        AchievementDataSource.makeChieve(Main.this, "Connoisseur", "Open APPlesauce");
+        AchievementDataSource.makeChieve(Main.this, getString(R.string.conname), getString(R.string.condesc));
 
         try
         {
@@ -193,13 +196,13 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
     {
         luckycheck++;
         if(luckycheck == 1)
-            AchievementDataSource.makeChieve(Main.this, "Up all night", "Get lucky");
+            AchievementDataSource.makeChieve(Main.this, getString(R.string.upallnightname), getString(R.string.upallnightdesc));
         else if(luckycheck == 5)
-            AchievementDataSource.makeChieve(Main.this, "Ladies man", "Get lucky 5 times");
+            AchievementDataSource.makeChieve(Main.this, getString(R.string.ladiesname), getString(R.string.ladiesdesc));
         else if(luckycheck == 10)
-        AchievementDataSource.makeChieve(Main.this, "Pimp", "Get lucky 10 times");
+        AchievementDataSource.makeChieve(Main.this, getString(R.string.pimpname), getString(R.string.pimpdesc));
         if(luckycheck == 25)
-            AchievementDataSource.makeChieve(Main.this, "Hugh Hefner", "Get lucky 25 times");
+            AchievementDataSource.makeChieve(Main.this, getString(R.string.hughname), getString(R.string.hughdesc));
 
         Random r = new Random();
         int randomApp = r.nextInt(apps.size());
@@ -246,7 +249,7 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
         int randomApp = r.nextInt(recApps.size());
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(GOOGLEPLAY + recApps.get(randomApp).getPName()));
+        intent.setData(Uri.parse(getString(R.string.googleplay) + recApps.get(randomApp).getPName()));
         startActivity(intent);
     }
 
@@ -273,15 +276,15 @@ public class Main extends Activity implements SearchView.OnQueryTextListener, Ap
                 {
                     chievecheck++;
                     if(chievecheck == 1)
-                        AchievementDataSource.makeChieve(Main.this, "First-timer", "Checked your achievements");
+                        AchievementDataSource.makeChieve(Main.this, getString(R.string.firsttimename), getString(R.string.firsttimedesc));
                     else if(chievecheck == 5)
-                        AchievementDataSource.makeChieve(Main.this, "Eager", "Checked your achievements 5 times");
+                        AchievementDataSource.makeChieve(Main.this, getString(R.string.eagername), getString(R.string.eagerdesc));
                     else if(chievecheck == 10)
-                        AchievementDataSource.makeChieve(Main.this, "Agog", "Checked your achievements 10 times");
+                        AchievementDataSource.makeChieve(Main.this, getString(R.string.agogname), getString(R.string.agogdesc));
                     else if(chievecheck == 25)
-                        AchievementDataSource.makeChieve(Main.this, "Obsessive", "Checked your achievements 25 times");
+                        AchievementDataSource.makeChieve(Main.this, getString(R.string.obsname), getString(R.string.obsdesc));
                     else if(chievecheck == 100)
-                        AchievementDataSource.makeChieve(Main.this, "Ridiculous", "Checked your achievements 100 times");
+                        AchievementDataSource.makeChieve(Main.this, getString(R.string.ridname), getString(R.string.riddesc));
 
                     Intent i = new Intent(Main.this, Achievements.class);
                     startActivity(i);

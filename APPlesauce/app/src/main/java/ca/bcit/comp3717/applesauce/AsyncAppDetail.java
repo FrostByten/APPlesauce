@@ -33,7 +33,6 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
         HttpClient httpClient = new DefaultHttpClient();
         ArrayList<AppInfo> recAppList = new ArrayList<AppInfo>();
 
-
         // This code will use sample JSONObject from the sample class to save queries from
         // PlaystoreAPI key
         Iterator<JSONObject> it = Sample.getSampleRecApps().iterator();
@@ -43,8 +42,6 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
 
             try
             {
-                System.out.println(JSONtestApp.getString("packageID"));
-                System.out.println(JSONtestApp.getString("appName"));
 
                 recAppList.add(new AppInfo(JSONtestApp.getString("appName") + "                                               ",
                                            JSONtestApp.getString("packageID"),
@@ -61,7 +58,9 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
         return recAppList;
         // End of sample query
 
-        /* Uncomment this when ready for actual process
+
+        /*
+        // Uncomment this when ready for actual process
         // End of sample
 
         //Iterator<String> it = recApp_packageName.iterator();
@@ -70,9 +69,8 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
         //debugging: only display 2 recommended apps
         for(int i = 0; i < 2; i++)
         {
-            System.out.println("getting info for: " + recApp_packageName.get(i));
             String URL = PLAYSTOREAPI +
-                    //it.next() +
+                    it.next() +
                     recApp_packageName.get(i) +
                     PLAYSTOREAPI_KEY;
 
@@ -98,10 +96,6 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
 
                     // Create recommended app AppInfo
                     JSONObject jsonObject = new JSONObject(stringBuilder.toString());
-
-                    // debug
-                    System.out.println(jsonObject.getString("packageID"));
-                    System.out.println(jsonObject.getString("appName"));
                     // end of debug
 
                     recAppList.add(new AppInfo(jsonObject.getString("appName"),
@@ -183,7 +177,6 @@ public class AsyncAppDetail extends AsyncTask<String, Void, ArrayList<AppInfo>>
                 {
                     for(int i = 0; i < jsonArray.length(); i++)
                     {
-                        System.out.println("recommendedApp: " + jsonArray.get(i).toString());
                         recApps.add(jsonArray.get(i).toString());
                     }
 

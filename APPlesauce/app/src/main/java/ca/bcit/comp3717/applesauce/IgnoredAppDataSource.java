@@ -52,7 +52,6 @@ public class IgnoredAppDataSource {
 
         if(checkIfIgnored(appname))
         {
-            System.out.println(appname + " is already on the database");
             return null;
         }
 
@@ -75,12 +74,10 @@ public class IgnoredAppDataSource {
         Ignored ignoredApp = cursorToIgnoredApp(cursor);
         cursor.close();
 
-        System.out.println("ignored: " + ignoredApp.getAppName());
         return ignoredApp;
     }
 
     public void deleteIgnoredApp(String appname) {
-        System.out.println("App deleted with id: " + appname);
 
         database.delete(IgnoredAppSQLHelper.TABLE_NAME,
                 IgnoredAppSQLHelper.COLUMN_APPNAME + " = '" + appname + "'",

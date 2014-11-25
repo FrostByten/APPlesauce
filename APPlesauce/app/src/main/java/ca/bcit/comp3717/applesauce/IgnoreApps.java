@@ -40,7 +40,7 @@ public class IgnoreApps extends Activity implements SearchView.OnQueryTextListen
         sv.setIconifiedByDefault(false);
         sv.setOnQueryTextListener(this);
         sv.setSubmitButtonEnabled(true);
-        sv.setQueryHint("Search");
+        sv.setQueryHint(getString(R.string.query));
 
         lv = (ListView)findViewById(R.id.listViewIA);
         lv.setTextFilterEnabled(true);

@@ -23,7 +23,6 @@ public class AchievementSQLHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        System.out.println("Creating DB with: " + DATABASE_CREATE2);
         database.execSQL(DATABASE_CREATE2);
     }
 

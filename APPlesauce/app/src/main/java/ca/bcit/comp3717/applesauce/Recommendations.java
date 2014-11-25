@@ -18,13 +18,15 @@ public class Recommendations extends Activity
 {
     //ArrayList<AppInfo> apps = new ArrayList<AppInfo>();
     AsyncAppDetail getRecApps = new AsyncAppDetail();
-    private final static String GOOGLEPLAY = "http://play.google.com/store/apps/details?id=";
+    private static String GOOGLEPLAY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_recommendations);
+
+        GOOGLEPLAY = getString(R.string.googleplay);
 
         setProgressBarIndeterminateVisibility(true);
         getRecApps.delegate = this;
@@ -73,13 +75,13 @@ public class Recommendations extends Activity
 
                 Main.gocount++;
                 if(Main.gocount == 1)
-                AchievementDataSource.makeChieve(Recommendations.this, "Give it a go", "Check out 1 app");
+                AchievementDataSource.makeChieve(Recommendations.this, getString(R.string.givegoname), getString(R.string.givegodesc));
                 else if(Main.gocount == 5)
-                    AchievementDataSource.makeChieve(Recommendations.this, "Give it a good go", "Check out 5 apps");
+                    AchievementDataSource.makeChieve(Recommendations.this, getString(R.string.goodgoname), getString(R.string.goodgodesc));
                 else if(Main.gocount == 10)
-                    AchievementDataSource.makeChieve(Recommendations.this, "Give it some wellie", "Check out 10 apps");
+                    AchievementDataSource.makeChieve(Recommendations.this, getString(R.string.welliename), getString(R.string.welliedesc));
                 else if(Main.gocount == 25)
-                    AchievementDataSource.makeChieve(Recommendations.this, "Master of apps", "Check out 25 apps");
+                    AchievementDataSource.makeChieve(Recommendations.this, getString(R.string.mastername), getString(R.string.masterdesc));
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(GOOGLEPLAY + app.getPName()));

@@ -54,7 +54,6 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
                         {
                             if(origValues.get(i).toLowerCase().contains(constraint.toString().toLowerCase()))
                             {
-                                System.out.println("found " + origValues.get(i).toLowerCase());
                                 results.add(Pair.create(origValues.get(i),origImages.get(i)));
                             }
                         }
@@ -136,17 +135,18 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
 
                     try
                     {
+                        Context c = getContext();
                         datasource.open();
                         datasource.deleteIgnoredApp(textView.getText().toString());
                         Main.unignorecount++;
                         if(Main.unignorecount == 1)
-                            AchievementDataSource.makeChieve(getContext(), "Never mind", "Un-ignore an app");
+                            AchievementDataSource.makeChieve(c, c.getString(R.string.nevername), c.getString(R.string.neverdesc));
                         else if(Main.unignorecount == 5)
-                            AchievementDataSource.makeChieve(getContext(), "Not that bad", "Un-ignore 5 apps");
+                            AchievementDataSource.makeChieve(c, c.getString(R.string.notthatname), c.getString(R.string.notthatdesc));
                         else if(Main.unignorecount == 10)
-                            AchievementDataSource.makeChieve(getContext(), "I guess you can live with it", "Un-ignore 10 apps");
+                            AchievementDataSource.makeChieve(c, c.getString(R.string.iguessname), c.getString(R.string.iguessdesc));
                         else if(Main.unignorecount == 25)
-                            AchievementDataSource.makeChieve(getContext(), "Enable ALL the apps!", "Un-ignore 25 apps");
+                            AchievementDataSource.makeChieve(c, c.getString(R.string.firsttimename), c.getString(R.string.firsttimedesc));
 
                     }
                     catch (SQLException e)
@@ -159,17 +159,18 @@ public class IgnoreAppArrayAdapter extends ArrayAdapter<String>
 
                     try
                     {
+                        Context c = getContext();
                         datasource.open();
                         datasource.ignoreApp(textView.getText().toString());
                         Main.ignorecount++;
                         if(Main.ignorecount == 1)
-                            AchievementDataSource.makeChieve(getContext(), "Do not want", "Ignore an app");
+                            AchievementDataSource.makeChieve(c, c.getString(R.string.donotname), c.getString(R.string.donotdesc));
                         else if(Main.ignorecount == 5)
-                            AchievementDataSource.makeChieve(getContext(), "Hate", "Ignore 5 apps");
+                            AchievementDataSource.makeChieve(c, c.getString(R.string.hatename), c.getString(R.string.hatedesc));
                         else if(Main.ignorecount == 10)
-                            AchievementDataSource.makeChieve(getContext(), "Disgust", "Ignore 10 apps");
+                            AchievementDataSource.makeChieve(c, c.getString(R.string.disgustname), c.getString(R.string.disgustdesc));
                         else if(Main.ignorecount == 25)
-                            AchievementDataSource.makeChieve(getContext(), "You might as well uninstall it", "Ignore 25 apps");
+                            AchievementDataSource.makeChieve(c, c.getString(R.string.youmightname), c.getString(R.string.youmightdesc));
                     }
                     catch (SQLException e)
                     {

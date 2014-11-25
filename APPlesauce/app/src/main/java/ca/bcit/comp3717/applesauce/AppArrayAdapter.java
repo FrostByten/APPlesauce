@@ -51,7 +51,6 @@ public class AppArrayAdapter extends ArrayAdapter<String> implements Filterable
                         {
                             if(origValues.get(i).toLowerCase().contains(constraint.toString().toLowerCase()))
                             {
-                                System.out.println("found " + origValues.get(i).toLowerCase());
                                 results.add(Pair.create(origValues.get(i),origImages.get(i)));
                             }
                         }
